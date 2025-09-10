@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+  <div class="row">
+    <!-- Map -->
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-body">
+          {{ plot_html | safe }}
+        </div>
+      </div>
+    </div>
+    <!-- Side Panel -->
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">{{ selected.city }}, {{ selected.state }}</h5>
+        </div>
+        <div class="card-body text-center">
+          <img src="{{ selected.image_url }}" class="img-fluid rounded mb-3">
+          <p><strong>Event Date:</strong> {{ selected.event_date }}</p>
+          <p><strong>Temperature:</strong> {{ selected.temp_f }}°F</p>
+          <p><strong>Description:</strong> {{ selected.weather_des }}</p>
+          <p><strong>Feels Like:</strong> {{ selected.feels_like }}°F</p>
+          <p><strong>Humidity:</strong> {{ selected.humidity }}%</p>
+          <p><strong>Wind Speed:</strong> {{ selected.wind_speed }}mph</p>
+          <p><strong>Wind Degree:</strong> {{ selected.wind_deg }}°</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- JS -->
+<script>
+  // Get the plotly graph div by class name
+  var plotDiv = document.getElementsByClassName('plotly-graph-div')[0];
+
+  plotDiv.on('plotly_click', function(event) {
+    // Extract customdata from clicked point
+    var data = event.points[0].customdata;
+
+    // Map custom_data to variables for readability
+    var image_url = data[0];
+    var event_date = data[1];
+    var temp_f = data[2];
+    var weather_des = data[3];
+    var feels_like = data[4];
+    var humidity = data[5];
+    var wind_speed = data[6];
+    var wind_deg = data[7];
+    var state = data[8];
+
+    // Update the side panel header
+    var city = event.points[0].hovertext;  // city name comes from hover_name
+
+    document.querySelector('.card-header h5').textContent = city + ', ' + state;
+
+    // Update the side panel body
+    var cardBody = document.querySelector('.card-body.text-center');
+    cardBody.innerHTML = `
+      <img src="${image_url}" class="img-fluid rounded mb-3">
+      <p><strong>Event Date:</strong> ${event_date}</p>
+      <p><strong>Temperature:</strong> ${temp_f}°F</p>
+      <p><strong>Weather Description:</strong> ${weather_des}</p>
+      <p><strong>Feels Like:</strong> ${feels_like}°F</p>
+      <p><strong>Humidity:</strong> ${humidity}%</p>
+      <p><strong>Wind Speed:</strong> ${wind_speed}mph</p>
+      <p><strong>Wind Deg:</strong> ${wind_deg}°</p>
+    `;
+  });
+</script>
+
+{% endblock %}

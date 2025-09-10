@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container-fluid vh-100">
+  <div class="row h-100">
+    <div class="col-12">
+        <div class="card-body h-100">
+          {{ numerical_plot_html | safe }}
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

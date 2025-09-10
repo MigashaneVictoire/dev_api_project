@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      body, html {
+        height: 100%;
+      }
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  </head>
+  <body class="d-flex justify-content-center align-items-center">
+        
+          {% block options %} {% endblock %}
+
+          <!-- the src is a Content Delivery Network URL pointing to the bcrypt.js library (load bcryot)-->
+          <!-- <script src="{{ url_for('static', filename='js/bcrypt.min.js') }}"></script> -->
+          
+          <!-- JS script for pasword hashing -->
+          <!-- <script>
+              window.bcrypt = dcodeIO.bcrypt; // alias bcrypt to match the script/js/bcrypt.js file definition
+
+              async function hashUserPassword(formID, passwordFielID) {
+                  console.log("bcrypt in global scope?", window.bcrypt);
+                  // get the raw password from an input field
+                  const signup_form = document.getElementById(formID);
+                  const password_field = document.getElementById(passwordFielID);
+                  const raw_password = password_field.value;
+                  // Hash password in the browser using bcrypt (use 10 salt rounds)
+                  const hashed_password = dcodeIO.bcrypt.hashSync(raw_password, 10);
+                  password_field.value = hashed_password;
+                  // Send hashed password to backend with a POST request
+                  signup_form.submit();
+              }
+
+          </script> -->
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block title%}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- Successful login alert -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+      <h2 class="mb-4">Get Data</h2>
+      <form method="POST" action="/filters/">
+
+        <div class="mb-3">
+          <label for="data_source" class="form-label">Data Source</label>
+          <input type="text" class="form-control" id="data_source" name="data_source" value="Weather" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="from_date">From Date:</label>
+          <input type="datetime-local" id="from_date" name="from_date" required>
+          
+          <label for="to_date">To Date:</label>
+          <input type="datetime-local" id="to_date" name="to_date" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="limit" class="form-label">Limit</label>
+          <input type="number" class="form-control" id="limit" name="limit" placeholder="Number between 1 and 20." required>
+        </div>
+        <button type="submit" class="btn btn-primary">Fetch</button>
+      </form>
+    </div>
+  </div>
+
+<div class="container py-4">
+  <h2 class="mb-4"> How it works</h2>
+  <h4 class="mb-4"> Data Source </h4>
+  <p>(NOT SET) This is the table you want to search from. You can search from one table (ex: table_name), or
+    from mulitple tables (ex: table_one, table_two, ect...)
+  </p>
+  <h4 class="mb-4"> Date </h4>
+  <p>You can specify boundries of search. User start/end date options to limit your results. </p>
+  <h4 class="mb-4"> Limit </h4>
+  <p> A default limit of 5 rows is set but you can select up to 20 rows.</p>
+</div>
+{% endblock %}
