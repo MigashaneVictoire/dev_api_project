@@ -73,4 +73,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=8000 ,debug=True)
+    # docker run --rm -it -v $(pwd):/workspace -p 8080:8000 dev_api_project bash
